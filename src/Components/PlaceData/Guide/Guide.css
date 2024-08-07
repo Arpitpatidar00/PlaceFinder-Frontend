@@ -1,0 +1,160 @@
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Submit Button Styles */
+.submit-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1000; /* Ensure it's on top */
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+/* Container for guide navigation */
+.guide-navigation {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* Button styles */
+.guide-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.guide-button:hover {
+  background-color: #7f8082;
+}
+
+/* Container for guide content */
+.guide-container {
+  padding: 20px;
+  border-radius: 10px;
+  position: relative; /* For absolute positioning of close button */
+}
+
+/* Content alignment */
+.guide-content {
+  text-align: center;
+}
+
+/* Guide image styles */
+.guide-image {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+/* Guide username styles */
+.guide-username {
+  font-size: 1.5em;
+  margin-top: 10px;
+}
+
+/* User content options styles */
+.user-content .guide-options {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.guide-option {
+  margin: 0 10px;
+  position: relative;
+}
+
+/* Guide description box */
+.guide-description {
+  background-color: #d6d6d6;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  padding: 10px;
+  position: absolute;
+  top: 50px;
+  left: -50px;
+  width: 300px;
+  z-index: 10;
+}
+
+/* Guide details box */
+.guide-details {
+  text-align: left;
+  margin-top: 20px;
+}
+
+/* Toggle switch styles */
+.toggle-container {
+  display: inline-block;
+  position: relative;
+  width: 40px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.toggle-input {
+  display: none;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 20px;
+  transition: background-color 0.4s;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.4s;
+}
+
+.toggle-input:checked + .toggle-slider {
+  background-color: #2196F3; /* Toggle color when checked */
+}
+
+.toggle-input:checked + .toggle-slider:before {
+  transform: translateX(20px); /* Slider position when checked */
+}
+
+/* Close button positioning */
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px; /* Changed from left to right */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  z-index: 1000; /* Ensure it's on top */
+}
