@@ -214,6 +214,8 @@ import { useSelector } from "react-redux";
 import "../Guide/Guide.css";
 import DriverInterface from "./DriverInterface";
 import { useAuth } from "../../../Context/AuthContext.js";
+import Api from '../../../Api.js';
+
 
 const Driver = () => {
   const placeId = useSelector((state) => state.place.placeId);
@@ -231,7 +233,11 @@ const Driver = () => {
   useEffect(() => {
     const fetchGuideData = async () => {
       try {
+<<<<<<< HEAD
         const response = await axios.get("https://travelling-backend.onrender.com/driver/driver");
+=======
+        const response = await axios.get(`${Api}/driver/driver`);
+>>>>>>> d368039 (improvements)
         setGuides(response.data.driverData);
       } catch (error) {
         console.error("Error fetching guide data:", error);
@@ -280,10 +286,17 @@ const Driver = () => {
     if (!isToggled) {
       try {
         await axios.delete(
+<<<<<<< HEAD
           `https://travelling-backend.onrender.com/driver/delete/${PlacedelectId}`
         );
         // After deletion, fetch updated guide data
         const response = await axios.get("https://travelling-backend.onrender.com/submit/driver");
+=======
+          `${Api}/driver/delete/${PlacedelectId}`
+        );
+        // After deletion, fetch updated guide data
+        const response = await axios.get(`${Api}/submit/driver`);
+>>>>>>> d368039 (improvements)
         setGuides(response.data.guideData);
         setIsAvailable(false); // Set availability to false after successful deletion
       } catch (error) {

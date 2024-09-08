@@ -203,6 +203,8 @@ import { useSelector } from "react-redux";
 import "./Guide.css";
 import GuideInterface from "./GuideInterface.js";
 import { useAuth } from "../../../Context/AuthContext.js";
+import Api from '../../../Api.js';
+
 
 const Guide = () => {
   const placeId = useSelector((state) => state.place.placeId);
@@ -215,12 +217,16 @@ const Guide = () => {
   const [guides, setGuides] = useState([]);
   const [currentGuideIndex, setCurrentGuideIndex] = useState(0);
   const [isToggled, setIsToggled] = useState(false);
-  const [isAvailable, setIsAvailable] = useState(true);
+  const [ setIsAvailable] = useState(true);
 
   useEffect(() => {
     const fetchGuideData = async () => {
       try {
+<<<<<<< HEAD
         const response = await axios.get("https://travelling-backend.onrender.com/guide/guide");
+=======
+        const response = await axios.get(`${Api}/guide/guide`);
+>>>>>>> d368039 (improvements)
         setGuides(response.data.guideData);
       } catch (error) {
         console.error("Error fetching guide data:", error);
@@ -267,8 +273,13 @@ const Guide = () => {
   const deleteGuideData = async () => {
     if (!isToggled) {
       try {
+<<<<<<< HEAD
         await axios.delete(`https://travelling-backend.onrender.com/guide/delete/${PlacedelectId}`);
         const response = await axios.get("https://travelling-backend.onrender.com/guide/guide");
+=======
+        await axios.delete(`${Api}/guide/delete/${PlacedelectId}`);
+        const response = await axios.get(`${Api}guide/guide`);
+>>>>>>> d368039 (improvements)
         setGuides(response.data.guideData);
         setIsAvailable(false);
       } catch (error) {

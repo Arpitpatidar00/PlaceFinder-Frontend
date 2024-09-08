@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 // import React, { useState } from "react";
 // import axios from "axios";
 // import "../Place.css"; // Ensure you have a CSS file for styles
@@ -90,12 +91,14 @@
 // };
 
 // export default GuideInterface;
+=======
+>>>>>>> d368039 (improvements)
 import React, { useState } from "react";
 import axios from "axios";
 import "../Place.css"; // Ensure you have a CSS file for styles
 import { useAuth } from "../../../Context/AuthContext";
 import { useSelector } from "react-redux";
-
+import Api from "../../../Api";
 const GuideInterface = ({ onDataSubmitted }) => {
   const [time, setTime] = useState("");
   const [price, setPrice] = useState("");
@@ -108,7 +111,11 @@ const GuideInterface = ({ onDataSubmitted }) => {
 
   const submitData = async () => {
     try {
+<<<<<<< HEAD
       const response = await axios.post("https://travelling-backend.onrender.com/guide/guide", {
+=======
+      const response = await axios.post(`${Api}/guide/guide`, {
+>>>>>>> d368039 (improvements)
         placeId,
         time,
         price,

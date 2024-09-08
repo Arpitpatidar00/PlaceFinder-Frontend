@@ -1,7 +1,5 @@
-// import React, { useEffect, useState, useMemo } from "react";
-// import axios from "axios";
-// import "./FeedbackDetails.css";
 
+<<<<<<< HEAD
 // export default function UserDataDetails({ feedbackId, onClose }) {
 //   const [userData, setUserData] = useState(null);
 //   const [userImages, setUserImages] = useState([]);
@@ -118,9 +116,13 @@
 //     </>
 //   );
 // }
+=======
+>>>>>>> d368039 (improvements)
 import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import "./FeedbackDetails.css";
+import Api from '../../Api.js';
+
 
 export default function UserDataDetails({ user, onClose }) {
   const [userData, setUserData] = useState(null);
@@ -131,14 +133,22 @@ export default function UserDataDetails({ user, onClose }) {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
+<<<<<<< HEAD
         const response = await fetch(`https://travelling-backend.onrender.com/Feedback/onlyone${user}`);
+=======
+        const response = await fetch(`${Api}/Feedback/onlyone${user}`);
+>>>>>>> d368039 (improvements)
 
         if (response.ok) {
           const data = await response.json();
           setUserData(data.userData);
 
           if (data.userData._id) {
+<<<<<<< HEAD
             const imageResponse = await axios.get(`https://travelling-backend.onrender.com/upload/user/${data.userData._id}`);
+=======
+            const imageResponse = await axios.get(`${Api}/upload/user/${data.userData._id}`);
+>>>>>>> d368039 (improvements)
             setUserImages(imageResponse.data);
           }
         } else {

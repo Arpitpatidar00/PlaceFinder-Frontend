@@ -13,15 +13,17 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { useAuth } from "../../Context/AuthContext.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Api from '../../Api.js';
+
 
 const ImageDetails = () => {
-  const { searchData, setCommentData, commentData } = useAuth();
+  const { searchData, setCommentData } = useAuth();
   const navigate = useNavigate();
 
   const placeId = useSelector((state) => state.place.placeId);
   const { userData } = useSelector((state) => state.auth);
 
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [ setSelectedImage] = useState(null);
   const [uploadedImages, setUploadedImages] = useState([]);
   const [showGuideProfile, setShowGuideProfile] = useState(false);
   const [showDriverProfile, setShowDriverProfile] = useState(false);
@@ -30,7 +32,11 @@ const ImageDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+<<<<<<< HEAD
         const response = await fetch(`https://travelling-backend.onrender.com/comments`);
+=======
+        const response = await fetch(`${Api}/comments`);
+>>>>>>> d368039 (improvements)
         if (!response.ok) {
           throw new Error("Failed to fetch comment data");
         }
@@ -50,7 +56,11 @@ const ImageDetails = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
+<<<<<<< HEAD
           `https://travelling-backend.onrender.com/add/${placeId}`
+=======
+          `${Api}/add/${placeId}`
+>>>>>>> d368039 (improvements)
         );
         if (response.data) {
           setSelectedData(response.data);
@@ -68,7 +78,11 @@ const ImageDetails = () => {
     const fetchUploadedImages = async () => {
       try {
         const response = await axios.get(
+<<<<<<< HEAD
           `https://travelling-backend.onrender.com/upload/uploadedImages`
+=======
+          `${Api}/upload/uploadedImages`
+>>>>>>> d368039 (improvements)
         );
         setUploadedImages(response.data);
       } catch (error) {
@@ -86,7 +100,11 @@ const ImageDetails = () => {
       reader.onloadend = async () => {
         const base64Image = reader.result;
         try {
+<<<<<<< HEAD
           const response = await axios.post(`https://travelling-backend.onrender.com/upload`, {
+=======
+          const response = await axios.post(`${Api}/upload`, {
+>>>>>>> d368039 (improvements)
             imageString: base64Image,
             placeId: placeId,
             userData:userData,
@@ -95,7 +113,11 @@ const ImageDetails = () => {
             setSelectedImage(base64Image);
             // Fetch updated images after upload
             const updatedImages = await axios.get(
+<<<<<<< HEAD
               `https://travelling-backend.onrender.com/upload/uploadedImages`
+=======
+              `${Api}/upload/uploadedImages`
+>>>>>>> d368039 (improvements)
             );
             setUploadedImages(updatedImages.data);
           }
@@ -223,7 +245,6 @@ const ImageDetails = () => {
             style={{ display: "none" }}
           />
         </div>
-        <Comment />
       
         <div>
           <h1>Comments</h1>

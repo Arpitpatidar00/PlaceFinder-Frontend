@@ -18,7 +18,11 @@
 //   useEffect(() => {
 //     const fetchData = async () => {
 //       try {
+<<<<<<< HEAD
 //         const response = await fetch("https://travelling-backend.onrender.com/add/");
+=======
+//         const response = await fetch("${Api}/add/");
+>>>>>>> d368039 (improvements)
 //         const data = await response.json();
 //         const shuffledData = data.sort(() => 0.5 - Math.random());
 //         setItems(shuffledData.slice(0, 15)); // Limit to 15 items
@@ -38,7 +42,11 @@
 //   const handleDelete = async (id) => {
 //     console.log("Deleting item with ID:", id); // Log ID for debugging
 //     try {
+<<<<<<< HEAD
 //       await axios.delete(`https://travelling-backend.onrender.com/add/${id}`);
+=======
+//       await axios.delete(`${Api}/add/${id}`);
+>>>>>>> d368039 (improvements)
 //       // Remove the deleted item from state
 //       setItems((prevItems) => prevItems.filter((item) => item._id !== id)); // Ensure the field matches
 //     } catch (error) {
@@ -130,8 +138,10 @@ import { setPlaceId } from "../../actions/placeActions.js";
 import "../.././Components/Card.css";
 import { useAdmin } from "../../Context/AdminContext.js";
 import axios from 'axios';
+import Api from '../../Api.js';
 
 const CardData = () => {
+
   const { items, setItems } = useAdmin();
   const [selectedId, setSelectedId] = useState(null);
   const [ref, inView] = useInView();
@@ -141,7 +151,11 @@ const CardData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+<<<<<<< HEAD
         const response = await fetch("https://travelling-backend.onrender.com/add/");
+=======
+        const response = await fetch(`${Api}/add/`);
+>>>>>>> d368039 (improvements)
         const data = await response.json();
         const shuffledData = data.sort(() => 0.5 - Math.random());
         setItems(shuffledData.slice(0, 200)); // Limit to 15 items
@@ -149,9 +163,8 @@ const CardData = () => {
         console.error("Error fetching data:", error);
       }
     };
-
     fetchData();
-  }, []);
+  }, [setItems]);
 
   const handleCardClick = (id) => {
     dispatch(setPlaceId(id));
@@ -163,7 +176,11 @@ const CardData = () => {
     if (window.confirm("Are you sure you want to delete this place?")) {
       console.log("Deleting item with ID:", id); // Log ID for debugging
       try {
+<<<<<<< HEAD
         await axios.delete(`https://travelling-backend.onrender.com/add/${id}`);
+=======
+        await axios.delete(`${Api}/add/${id}`);
+>>>>>>> d368039 (improvements)
         // Remove the deleted item from state
         setItems((prevItems) => prevItems.filter((item) => item._id !== id)); // Ensure the field matches
       } catch (error) {

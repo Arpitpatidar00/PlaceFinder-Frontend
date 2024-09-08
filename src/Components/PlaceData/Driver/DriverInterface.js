@@ -4,6 +4,7 @@ import axios from "axios";
 import "../Place.css"; // Ensure you have a CSS file for styles
 import { useAuth } from "../../../Context/AuthContext";
 import { useSelector } from "react-redux";
+import Api from "../../../Api";
 
 const DriverInterface = ({ onDataSubmitted }) => {
   const [time, setTime] = useState("");
@@ -18,7 +19,11 @@ const DriverInterface = ({ onDataSubmitted }) => {
 
   const submitData = async () => {
     try {
+<<<<<<< HEAD
       const response = await axios.post("https://travelling-backend.onrender.com/driver/driver", {
+=======
+      const response = await axios.post(`${Api}/driver/driver`, {
+>>>>>>> d368039 (improvements)
         placeId,
         time,
         price,

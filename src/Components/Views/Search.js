@@ -4,20 +4,20 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion"; // Import motion from framer-motion
 import { setPlaceId } from "../../actions/placeActions";
+import Api from '../../Api';
+
 import "../Card.css";
 
 const Search = () => {
   const dispatch = useDispatch();
   const [query, setQuery] = useState("");
   const [images, setImages] = useState([]);
-  const [searchClicked, setSearchClicked] = useState(false);
+  // const [ setSearchClicked] = useState(false);
   const [isVisible, setIsVisible] = useState(false); // State to track component visibility
 
   useEffect(() => {
     // Function to handle scroll event
     const handleScroll = () => {
-      const scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
       const searchComponent = document.getElementById("searchComponent");
       if (searchComponent) {
         const { top } = searchComponent.getBoundingClientRect();
@@ -39,10 +39,14 @@ const Search = () => {
 
   const handleSearch = async () => {
     try {
-      setSearchClicked(true); // Trigger search on button click
+      // setSearchClicked(true); // Trigger search on button click
       if (query.trim() !== "") {
         const response = await axios.get(
+<<<<<<< HEAD
           `https://travelling-backend.onrender.com/add/search?query=${query.trim()}`
+=======
+          `${Api}/add/search?query=${query.trim()}`
+>>>>>>> d368039 (improvements)
         );
         setImages(response.data);
       }
@@ -61,8 +65,7 @@ const Search = () => {
     (image.cityName &&
       image.cityName.toLowerCase() === query.trim().toLowerCase()) ? (
       <div>
-        <div class="bg">
-          <div class="blob">
+       
             <Link
               to={`/details/${image._id}`}
               key={image._id}
@@ -75,7 +78,7 @@ const Search = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -50 }}
                 transition={{ duration: 0.5 }}
-                className={`card ${isVisible ? "visible" : ""}`} // Apply animation when visible
+                className={`card ${isVisible ? "visible" : ""}`} 
               >
                 <img className="search-img" src={image.image} alt={image.placeName} />
                 <div className="container-card">
@@ -84,15 +87,14 @@ const Search = () => {
               </motion.div>
             </Link>
           </div>
-        </div>
-      </div>
+       
     ) : null
   );
 
   return (
-    <div>
-      <div id="searchComponent">
-        <input type="text" value={query} onChange={handleQueryChange} />
+    <div className="search-container">
+      <div className="searchComponent">
+        <input  value={query} placeholder="Search" onChange={handleQueryChange} />
         <button onClick={handleSearch}>Search</button>
       </div>
       <div id='search-card'>{renderCardData}</div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MDBCard, MDBCardBody, MDBCol, MDBContainer, MDBIcon, MDBRow, MDBTypography } from "mdb-react-ui-kit";
 import UserDataDetails from "../Views/ProfileDetails.js"; // Ensure the path is correct
 import "./Feedback.css";
-
+import Api from "../../Api.js";
 export default function Feedback() {
   const [isVisible, setIsVisible] = useState(false);
   const [feedbackData, setFeedbackData] = useState([]);
@@ -11,7 +11,6 @@ export default function Feedback() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       const feedbackSection = document.getElementById("Feedback");
       if (feedbackSection) {
         const { top } = feedbackSection.getBoundingClientRect();
@@ -27,7 +26,11 @@ export default function Feedback() {
   useEffect(() => {
     const fetchFeedbackData = async () => {
       try {
+<<<<<<< HEAD
         const response = await fetch("https://travelling-backend.onrender.com/Feedback");
+=======
+        const response = await fetch(`${Api}/Feedback`);
+>>>>>>> d368039 (improvements)
         if (response.ok) {
           const data = await response.json();
           setFeedbackData(
@@ -85,7 +88,7 @@ export default function Feedback() {
       <section className={`feedback-section ${isVisible ? "visible" : ""}`}>
         <MDBContainer className="py-2">
           <MDBRow className="justify-content-center">
-            <MDBCol md="11" lg="9" xl="7">
+            <MDBCol  >
               <div className="feedback-grid">
                 <div className="d-flex flex-wrap">
                   {feedbackData.map((feedbackItem) => (

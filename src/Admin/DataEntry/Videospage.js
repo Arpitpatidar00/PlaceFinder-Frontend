@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-
+import Api from '../../Api';
 const VideoUpload = () => {
   const [videoFile, setVideoFile] = useState(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [videos, setVideos] = useState([]);
+  // const [videos, setVideos] = useState([]);
 
   const handleFileChange = (e) => {
     setVideoFile(e.target.files[0]);
@@ -19,7 +19,11 @@ const VideoUpload = () => {
     formData.append('description', description);
 
     try {
+<<<<<<< HEAD
       const response = await axios.post('https://travelling-backend.onrender.com/video/upload', formData, {
+=======
+      const response = await axios.post(`${Api}/video/upload`, formData, {
+>>>>>>> d368039 (improvements)
         headers: {
           'Content-Type': 'multipart/form-data',
         },

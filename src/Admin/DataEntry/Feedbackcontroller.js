@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { TERipple } from 'tw-elements-react';
 import "./admin.css";
 import { useAdmin } from "../../Context/AdminContext";
+import Api from '../../Api.js';
 
 function Feedbackcontroller() {
   const { feedback, setFeedback } = useAdmin();
@@ -10,7 +11,11 @@ function Feedbackcontroller() {
   useEffect(() => {
     async function fetchFeedback() {
       try {
+<<<<<<< HEAD
         const response = await axios.get("https://travelling-backend.onrender.com/Feedback");
+=======
+        const response = await axios.get(`${Api}/Feedback`);
+>>>>>>> d368039 (improvements)
         setFeedback(response.data);
       } catch (error) {
         console.error("Error fetching comments:", error);
@@ -18,12 +23,16 @@ function Feedbackcontroller() {
     }
 
     fetchFeedback();
-  }, []);
+  }, [setFeedback]);
 
   const handleDeleteComment = async (id) => {
     if (window.confirm("Are you sure you want to delete this feedback?")) {
     try {
+<<<<<<< HEAD
       await axios.delete(`https://travelling-backend.onrender.com/Feedback/${id}`);
+=======
+      await axios.delete(`${Api}/Feedback/${id}`);
+>>>>>>> d368039 (improvements)
       const updatedfeedback = feedback.filter((feedback) => feedback._id !== id);
       setFeedback(updatedfeedback);
     } catch (error) {

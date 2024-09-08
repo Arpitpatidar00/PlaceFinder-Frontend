@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../../Components/Views/Screen.css";
 import './admin.css';
-
+import Api from "../../Api";
 function AdminRegistration() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -24,7 +22,11 @@ function AdminRegistration() {
     try {
       const imageData = preview ? preview.split(",")[1] : "";
 
+<<<<<<< HEAD
       const response = await axios.post("https://travelling-backend.onrender.com/admin/register", {
+=======
+await axios.post(`${Api}/admin/register`, {
+>>>>>>> d368039 (improvements)
         ...formData,
         image: imageData,
       });
@@ -66,8 +68,7 @@ function AdminRegistration() {
           width: "90%",
           maxWidth: "500px",
           padding: "20px",
-          border: "3px solid #ccc",
-          boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+         
         }}
       >
         <h1>Sign Up</h1>

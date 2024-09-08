@@ -7,6 +7,8 @@ import { useDispatch } from "react-redux";
 import { setPlaceId } from "../../actions/placeActions.js";
 import "../Card.css";
 import { useAuth } from "../../Context/AuthContext.js";
+import Api from '../../Api.js';
+
 
 const CardData = () => {
   const { items, setItems } =useAuth();
@@ -18,7 +20,11 @@ const CardData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+<<<<<<< HEAD
         const response = await fetch("https://travelling-backend.onrender.com/add/");
+=======
+        const response = await fetch(`${Api}/add/`);
+>>>>>>> d368039 (improvements)
         const data = await response.json();
         const shuffledData = data.sort(() => 0.5 - Math.random());
         setItems(shuffledData.slice(0, 15)); // Limit to 15 items

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Api from '../../Api';
 
 const Feedback = ({ isOpen, toggleModal }) => {
     const { userData } = useSelector((state) => state.auth);
@@ -17,7 +17,11 @@ const Feedback = ({ isOpen, toggleModal }) => {
 
     const handleSubmitFeedback = async () => {
         try {
+<<<<<<< HEAD
             const response = await fetch('https://travelling-backend.onrender.com/Feedback', {
+=======
+            const response = await fetch(`${Api}/Feedback`, {
+>>>>>>> d368039 (improvements)
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
