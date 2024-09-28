@@ -119,7 +119,6 @@ const GuideInterface = ({ onDataSubmitted }) => {
 
       });
       setPlaceId(response.data.guideData._id);
-      console.log(response.data.guideData._id);
 
       onDataSubmitted(response.data.dataId);
     } catch (error) {

@@ -12,7 +12,6 @@ function UserPage() {
       try {
         const response = await axios.get(`${Api}/api/v1/users`);
         setUsers(response.data.data || []); // Ensure data is always an array
-        console.log(response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
       }

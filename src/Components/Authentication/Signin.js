@@ -108,25 +108,31 @@ function Login() {
         profileImage: image ? await convertToBase64(image) : null, // Check if image exists
       };
   
+      // Add role-specific fields
       if (role === 'driver') {
-        userData.licenseNo = licenseNo;
-        userData.licenseImage = licenseImage || null; // Check if licenseImage exists
+        userData.licenseNo = licenseNo || null;
+        userData.licenseImage = licenseImage ? await convertToBase64(licenseImage) : null; // Convert to Base64 if it exists
       } else if (role === 'guide') {
-        userData.aadharNo = aadharNo;
-        userData.aadharImage = aadharImage || null; // Check if aadharImage exists
+        userData.aadharNo = aadharNo || null;
+        userData.aadharImage = aadharImage ? await convertToBase64(aadharImage) : null; // Convert to Base64 if it exists
       }
   
-      const response = await signUp(userData); // Replace with your signup function
+      // Call the signUp function
+      await signUp(userData);
+      
       alert('Signup successful!');
       navigate('/home');
-      console.log('Signup successful:', response);
     } catch (error) {
       console.error('Error during signup:', error);
-      alert('Error during signup. Please try again.');
+      
+      // Display error message from server if available
+      const errorMessage = error.response?.data?.message || 'Error during signup. Please try again.';
+      alert(errorMessage);
     } finally {
       setLoading(false); // Deactivate loader after the process is complete
     }
   };
+  
   const handleSignIn = async (e) => {
     e.preventDefault();
     setLoading(true); // Activate loader

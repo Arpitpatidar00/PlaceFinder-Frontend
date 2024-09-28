@@ -41,7 +41,6 @@ const CardData = () => {
   const handleDelete = async (id) => {
     // Ask for confirmation
     if (window.confirm("Are you sure you want to delete this place?")) {
-      console.log("Deleting item with ID:", id); // Log ID for debugging
       try {
         await axios.delete(`https://travelling-backend.onrender.com/add/${id}`);
         await axios.delete(`${Api}/add/${id}`);

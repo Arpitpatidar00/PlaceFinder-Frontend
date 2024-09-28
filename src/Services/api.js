@@ -5,7 +5,6 @@ import Api from '../Api';
 
 
 export const signUp = async (userData) => {
-  console.log("Sending User Data:", userData);
   try {
     const response = await axios.post(`${Api}/auth/signup`, userData);
     return response.data;  // Return the server response
@@ -43,7 +42,6 @@ export const adminService = {
         email,
         password,
       });
-      console.log(response)
       return response.data;
     } catch (error) {
       throw new Error("Error logging in: " + error.response.data.message);
