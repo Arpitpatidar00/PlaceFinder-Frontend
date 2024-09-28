@@ -206,6 +206,7 @@
 // };
 
 // export default Driver;
+
 import React, { useState, useEffect } from "react";
 import { IoIosCall } from "react-icons/io";
 import { IoAddSharp } from "react-icons/io5";
@@ -219,8 +220,9 @@ import Api from '../../../Api.js';
 
 const Driver = () => {
   const placeId = useSelector((state) => state.place.placeId);
-  const userData = useSelector((state) => state.auth.userData);
-  const { PlacedelectId } = useAuth(); // Corrected the context variable name
+  const userDataString = localStorage.getItem("userData");
+  const userData = userDataString ? JSON.parse(userDataString) : null;
+    const { PlacedelectId } = useAuth(); // Corrected the context variable name
 
   const [showCallDescription, setShowCallDescription] = useState(false);
   const [showAddDescription, setShowAddDescription] = useState(false);
@@ -233,11 +235,7 @@ const Driver = () => {
   useEffect(() => {
     const fetchGuideData = async () => {
       try {
-<<<<<<< HEAD
-        const response = await axios.get("https://travelling-backend.onrender.com/driver/driver");
-=======
         const response = await axios.get(`${Api}/driver/driver`);
->>>>>>> d368039 (improvements)
         setGuides(response.data.driverData);
       } catch (error) {
         console.error("Error fetching guide data:", error);
@@ -285,26 +283,23 @@ const Driver = () => {
   const deleteGuideData = async () => {
     if (!isToggled) {
       try {
-        await axios.delete(
-<<<<<<< HEAD
-          `https://travelling-backend.onrender.com/driver/delete/${PlacedelectId}`
-        );
-        // After deletion, fetch updated guide data
+        // Delete the guide data using the ID
+        await axios.delete(`https://travelling-backend.onrender.com/driver/delete/${PlacedelectId}`);
+  
+        // After deletion, fetch updated driver data
         const response = await axios.get("https://travelling-backend.onrender.com/submit/driver");
-=======
-          `${Api}/driver/delete/${PlacedelectId}`
-        );
-        // After deletion, fetch updated guide data
-        const response = await axios.get(`${Api}/submit/driver`);
->>>>>>> d368039 (improvements)
+  
+        // Set the updated driver data
         setGuides(response.data.guideData);
-        setIsAvailable(false); // Set availability to false after successful deletion
+  
+        // Set availability to false after successful deletion
+        setIsAvailable(false);
       } catch (error) {
         console.error("Error deleting guide data:", error);
       }
     }
   };
-
+  
   return (
     <div>
       {userData.role === "user" && (

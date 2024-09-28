@@ -1,97 +1,218 @@
-.brand-logo,
-h6 {
-  font-family: "Grand Hotel", cursive;
-  color: black;
-}
-
-.brand-logo {
-margin-left: 20px;
-background-color: transparent;
-border: none;
-color: black !important;
-background-color: transparent !important;
-}
-/* Navbar.css */
-.user-image {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  border: #333;
-}
-
-.profile-dropdown {
-  position: absolute;
+/* General Navbar Styles */
+.nav {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content:center ;
-  width: 150px;
-  display: grid;
-  top: 70px;
-  right: 20px;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 30px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  list-style: none;
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  transition: background-color 0.3s ease-in-out;
+  position: sticky;
+  top: 0;
   z-index: 1000;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-
+  padding: 10px 20px;
+  font-family: Cursive;
 }
 
-.profile-dropdown li {
-  margin: 5px 0;
+/* Navbar hover effect */
+.nav:hover {
+  background-color: #f4f4f4;
 }
 
-.profile-dropdown a,
-.profile-dropdown button {
-  text-decoration: none;
-  color: black;
-  display: block;
+/* Left-aligned button */
+.navbtn {
+  margin-right: auto;
+  background-color: transparent;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Right-aligned buttons */
+.navbtn-rightside {
+  background-color: transparent;
+  color: #333;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Button hover effects */
+.navbtn-rightside:hover,
+.navbtn:hover {
+  color: #007bff;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Mobile Menu Icon */
+#checkbox {
+  display: none;
+}
+
+.toggle {
+  position: relative;
+  width: 30px; /* Adjusted width to 30px */
+  height: 30px; /* Adjusted height to 30px */
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px; /* Reduced gap to fit within the smaller dimensions */
+}
+
+.bars {
   width: 100%;
-  text-align: left;
-  background: none;
-  border: none;
-  cursor: pointer;
+  height: 3px; /* Adjusted height for smaller bars */
+  background-color: rgba(0, 0, 0, 0.598);
+  border-radius: 5px;
+  transition-duration: 0.3s;
 }
 
-.profile-dropdown button:hover,
-.profile-dropdown a:hover {
-  background-color: #f0f0f0;
+/* Hamburger icon transformation */
+#checkbox:checked + .toggle #bar1 {
+  transform: rotate(45deg);
+  transform-origin: left center;
+  transition-duration: 0.3s;
 }
-#logout-btn {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  color: #333;
-  font-size: 14px;
+
+#checkbox:checked + .toggle #bar2 {
+  opacity: 0;
+}
+
+#checkbox:checked + .toggle #bar3 {
+  transform: rotate(-45deg);
+  transform-origin: left center;
+  transition-duration: 0.3s;
+}
+
+
+/* Navbar Links */
+.nav-links {
+  list-style: none;
   display: flex;
+  gap: 20px;
   align-items: center;
-
 }
 
-#logout-btn button:hover {
-  color: #fffbfb;
-  /* Change hover color as needed */
+.nav-links li {
+  position: relative;
 }
-#profile-btn button:hover {
-background-color: transparent;  /* Change hover color as needed */
-}
-#profile{
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
+
+.nav-links a {
+  text-decoration: none;
   color: #333;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  
+  transition: color 0.3s ease;
 }
-.home-btn{
-  color: black;
-  font-size: 14px;
-  border: none;
-  font-family: "Grand Hotel", cursive;
-  background-color: transparent !important;
 
+.nav-links a:hover {
+  color: #007bff;
+}
 
+/* Mobile Menu Styles */
+@media (max-width: 768px) {
+  .toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links li {
+    padding: 12px 20px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .nav-links li:hover {
+    background-color: #f0f0f0;
+  }
+}
+
+/* Tablet-friendly styles */
+@media (max-width: 480px) {
+  .nav {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .navbtn,
+  .navbtn-rightside {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .user-image {
+    width: 36px;
+    height: 36px;
+  }
+
+  .home-btn {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .toggle {
+    width: 24px;
+    height: 24px;
+  }
+
+  .bars {
+    height: 3px;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 360px) {
+  .nav {
+    padding: 8px 10px;
+  }
+
+  .navbtn,
+  .navbtn-rightside {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .user-image {
+    width: 32px;
+    height: 32px;
+  }
+
+  .home-btn {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .toggle {
+    width: 22px;
+    height: 22px;
+  }
+
+  .bars {
+    height: 2px;
+  }
 }

@@ -11,11 +11,7 @@ function CommentControl() {
   useEffect(() => {
     async function fetchComments() {
       try {
-<<<<<<< HEAD
-        const response = await axios.get("https://travelling-backend.onrender.com/comments");
-=======
         const response = await axios.get(`${Api}/comments`);
->>>>>>> d368039 (improvements)
         setComments(response.data);
       } catch (error) {
         console.error("Error fetching comments:", error);
@@ -28,11 +24,7 @@ function CommentControl() {
   const handleDeleteComment = async (id) => {
     if (window.confirm("Are you sure you want to delete this comment ?")) {
     try {
-<<<<<<< HEAD
-      await axios.delete(`https://travelling-backend.onrender.com/comments/${id}`);
-=======
       await axios.delete(`${Api}/comments/${id}`);
->>>>>>> d368039 (improvements)
       const updatedComments = comments.filter((comment) => comment._id !== id);
       setComments(updatedComments);
     } catch (error) {

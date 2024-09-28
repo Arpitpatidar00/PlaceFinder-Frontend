@@ -19,11 +19,7 @@ const DriverInterface = ({ onDataSubmitted }) => {
 
   const submitData = async () => {
     try {
-<<<<<<< HEAD
-      const response = await axios.post("https://travelling-backend.onrender.com/driver/driver", {
-=======
       const response = await axios.post(`${Api}/driver/driver`, {
->>>>>>> d368039 (improvements)
         placeId,
         time,
         price,

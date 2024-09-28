@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Profile.css";
-import { useSelector } from "react-redux";
 import Api from "../../Api.js";
 
 // Utility function to convert file to base64
@@ -15,8 +14,9 @@ const fileToBase64 = (file) => {
 };
 
 function Profile() {
-  const { userData } = useSelector((state) => state.auth);
-
+  const userDataString = localStorage.getItem("userData");
+  const userData = userDataString ? JSON.parse(userDataString) : null;
+  
   const [userImages, setUserImages] = useState([]);
   const [showAllImages, setShowAllImages] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -34,11 +34,7 @@ function Profile() {
   useEffect(() => {
     const fetchUserImages = async () => {
       try {
-<<<<<<< HEAD
-        const response = await axios.get(`https://travelling-backend.onrender.com/upload/user/${userData._id}`);
-=======
         const response = await axios.get(`${Api}/upload/user/${userData._id}`);
->>>>>>> d368039 (improvements)
         setUserImages(response.data);
       } catch (error) {
         console.error("Error fetching user images:", error);
@@ -66,13 +62,8 @@ function Profile() {
       setUserStatus(newStatus);
 
       if (newStatus === "Offline") {
-<<<<<<< HEAD
-        await axios.delete(`https://travelling-backend.onrender.com/guide/delete/${userData._id}`);
-        await axios.delete(`https://travelling-backend.onrender.com/driver/delete/${userData._id}`);
-=======
         await axios.delete(`${Api}/guide/delete/${userData._id}`);
         await axios.delete(`${Api}/driver/delete/${userData._id}`);
->>>>>>> d368039 (improvements)
       }
     } catch (error) {
       console.error("Error toggling user status:", error);
@@ -116,11 +107,7 @@ function Profile() {
     }
 
     try {
-<<<<<<< HEAD
-      await axios.put(`https://travelling-backend.onrender.com/auth/profileupdate/${userData._id}`, formData, {
-=======
       await axios.put(`${Api}/auth/profileupdate/${userData._id}`, formData, {
->>>>>>> d368039 (improvements)
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -147,13 +134,13 @@ function Profile() {
             <div className="profile-header items-center mb-8">
               <div className="profile-image mr-40">
                 <img
-                  src={`data:image/png;base64,${userData.image}`}
+                  src={userData.profileImage}
                   alt="Profile"
                   className="w-24 h-24 rounded-full"
                 />
               </div>
               <div className="profile-info flex-grow">
-                <h1 className="text-2xl font-bold">{userData.username}</h1>
+                <h1 className="text-2xl font-bold">{userData.name}</h1>
                 <div className="stats mt-2">
                   <div className="stat text-lg">
                     <span className="font-bold">{userImages.length}</span>

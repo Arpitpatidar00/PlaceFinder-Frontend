@@ -208,8 +208,8 @@ import Api from '../../../Api.js';
 
 const Guide = () => {
   const placeId = useSelector((state) => state.place.placeId);
-  const userData = useSelector((state) => state.auth.userData);
-  const { PlacedelectId } = useAuth();
+  const userDataString = localStorage.getItem("userData");
+  const userData = userDataString ? JSON.parse(userDataString) : null;  const { PlacedelectId } = useAuth();
 
   const [showCallDescription, setShowCallDescription] = useState(false);
   const [showAddDescription, setShowAddDescription] = useState(false);
@@ -222,11 +222,7 @@ const Guide = () => {
   useEffect(() => {
     const fetchGuideData = async () => {
       try {
-<<<<<<< HEAD
-        const response = await axios.get("https://travelling-backend.onrender.com/guide/guide");
-=======
         const response = await axios.get(`${Api}/guide/guide`);
->>>>>>> d368039 (improvements)
         setGuides(response.data.guideData);
       } catch (error) {
         console.error("Error fetching guide data:", error);
@@ -273,13 +269,8 @@ const Guide = () => {
   const deleteGuideData = async () => {
     if (!isToggled) {
       try {
-<<<<<<< HEAD
-        await axios.delete(`https://travelling-backend.onrender.com/guide/delete/${PlacedelectId}`);
-        const response = await axios.get("https://travelling-backend.onrender.com/guide/guide");
-=======
         await axios.delete(`${Api}/guide/delete/${PlacedelectId}`);
         const response = await axios.get(`${Api}guide/guide`);
->>>>>>> d368039 (improvements)
         setGuides(response.data.guideData);
         setIsAvailable(false);
       } catch (error) {

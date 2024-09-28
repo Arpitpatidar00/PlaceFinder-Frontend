@@ -1,118 +1,187 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/authActions";
 import "./Navbar.css";
+import { useAuth } from "../../Context/AuthContext";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { userData, isLoggedIn } = useSelector((state) => state.auth);
+  const { isAuthenticated } = useSelector((state) => state.auth);
+
+  const userDataString = localStorage.getItem("userData");
+  const userData = userDataString ? JSON.parse(userDataString) : null;
+
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { setIsLogin, isMobile, setIsMobile } = useAuth();
 
   useEffect(() => {
     setIsProfileMenuOpen(false);
+    setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
   const handleLogout = () => {
-    dispatch(logout());
-    navigate("/");
+    if (window.confirm("Are you sure you want to log out?")) {
+      dispatch(logout());
+      localStorage.removeItem("token");
+      localStorage.removeItem("userData");
+      navigate("/");
+    }
   };
 
-  const toggleProfileMenu = () => {
-    setIsProfileMenuOpen(!isProfileMenuOpen);
-  };
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
 
-  const togleProfile = () => {
-    navigate("/profile");
-  };
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
-  const toggleHome = () => {
-    navigate("/home");
-  };
+    return () => window.removeEventListener("resize", handleResize);
+  }, [setIsMobile]);
 
-  const toggleLogin = () => {
-    navigate("/login");
-  };
-
-  const toggleSignup = () => {
-    navigate("/signup");
-  };
-
-  const onMainPage = () => {
-    navigate("/");
-  };
-
-  const toggleAdmin = () => {
-    navigate("/admin");
+  const toggleProfileMenu = () => setIsProfileMenuOpen((prev) => !prev);
+  const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
+  const navigateTo = (path) => {
+    navigate(path);
+    setIsMobileMenuOpen(false); // Close mobile menu after navigation
   };
 
   const isAdmin = userData?.role === "admin";
+  const profileImageSrc =
+    userData?.profileImage || "/path/to/default-avatar.png"; // Add a default avatar image
 
   return (
-    <nav style={{ position: "sticky", width: "100%", zIndex: 1000 }}>
-      <div className="nav-wrapper white">
-        <button onClick={onMainPage} className="brand-logo left">
+    <nav>
+      <div className="nav">
+        <button className="navbtn" onClick={() => navigateTo("/")}>
           PlaceFinder
         </button>
-        <ul className="mr-20 right">
-          {isLoggedIn ? (
-            <>
-              {!isAdmin && (
-                <li>
-                  <button className="home-btn mr-10 fs-4" onClick={toggleHome}>
-                    Home
-                  </button>
-                </li>
+        {isMobile && (
+          <>
+            <input
+              type="checkbox"
+              id="checkbox"
+              checked={isMobileMenuOpen}
+              onChange={toggleMobileMenu}
+            />
+            <label htmlFor="checkbox" className="toggle">
+              <div
+                className={`bars ${isMobileMenuOpen ? "rotate-bar1" : ""}`}
+                id="bar1"
+              ></div>
+              <div
+                className={`bars ${isMobileMenuOpen ? "fade-bar2" : ""}`}
+                id="bar2"
+              ></div>
+              <div
+                className={`bars ${isMobileMenuOpen ? "rotate-bar3" : ""}`}
+                id="bar3"
+              ></div>
+            </label>
+          </>
+        )}
+        <ul className={`nav-links ${isMobileMenuOpen ? "active" : ""}`}>
+          {!isAdmin && isAuthenticated && (
+            <li>
+              <button
+                className="navbtn-rightside"
+                onClick={() => navigateTo("/home")}
+              >
+                Home
+              </button>
+            </li>
+          )}
+          {isAdmin && (
+            <li>
+              <button className="navbtn" onClick={() => navigateTo("/admin")}>
+                Admin
+              </button>
+            </li>
+          )}
+
+          {isAuthenticated && (
+            <li className="profile-menu" onClick={toggleProfileMenu}>
+              <img
+                className="rounded-circle shadow-1-strong me-3"
+                src={profileImageSrc}
+                alt="avatar"
+                width="50"
+                height="50"
+              />
+              {isProfileMenuOpen && (
+                <ul className="profile-dropdown">
+                  <li>
+                    <button
+                      className="navbtn"
+                      onClick={() => navigateTo("/profile")}
+                    >
+                      View Profile
+                    </button>
+                  </li>
+                  <li>
+                    <button className="navbtn" onClick={handleLogout}>
+                      Logout <LogoutIcon />
+                    </button>
+                  </li>
+                </ul>
               )}
-              <li className="profile-menu" onClick={toggleProfileMenu}>
-                <img
-                  src={`data:image/png;base64,${userData.image}`}
-                  alt="User Profile"
-                  className="user-image"
-                />
-                {isProfileMenuOpen && (
-                  <ul className="profile-dropdown">
-                    <li>
-                      <button id="profile" onClick={togleProfile}>
-                        View Profile
-                      </button>
-                    </li>
-                    <li>
-                      <button id="logout-btn" onClick={handleLogout}>
-                        Logout <LogoutIcon className="h-1 w-1" />
-                      </button>
-                    </li>
-                  </ul>
-                )}
+            </li>
+          )}
+          {!isAuthenticated && (
+            <>
+              <li>
+                <button
+                  className="navbtn"
+                  onClick={() => {
+                    setIsLogin(false);
+                    navigateTo("/login");
+                  }}
+                >
+                  Login
+                </button>
+              </li>
+              <li>
+                <button
+                  className="navbtn"
+                  onClick={() => {
+                    setIsLogin(true);
+                    navigateTo("/login");
+                  }}
+                >
+                  Signup
+                </button>
               </li>
             </>
-          ) : (
+          )}
+          {isMobile && !isAuthenticated && (
             <>
-              {!isAdmin && (
-                <>
-                  <li>
-                    <button className="home-btn mr-10 fs-4" onClick={toggleLogin}>
-                      Login
-                    </button>
-                  </li>
-                  <li>
-                    <button className="home-btn mr-10 fs-4" onClick={toggleSignup}>
-                      Signup
-                    </button>
-                  </li>
-                </>
-              )}
-              {isAdmin && (
-                <li>
-                  <button className="home-btn mr-10 fs-4" onClick={toggleAdmin}>
-                    Admin
-                  </button>
-                </li>
-              )}
+              <li>
+                <button
+                  className="navbtn"
+                  onClick={() => {
+                    setIsLogin(false);
+                    navigateTo("/login");
+                  }}
+                >
+                  Login
+                </button>
+              </li>
+              <li>
+                <button
+                  className="navbtn"
+                  onClick={() => {
+                    setIsLogin(true);
+                    navigateTo("/login");
+                  }}
+                >
+                  Signup
+                </button>
+              </li>
             </>
           )}
         </ul>

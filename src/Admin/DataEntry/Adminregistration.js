@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "../../Components/Views/Screen.css";
 import './admin.css';
 import Api from "../../Api";
+
 function AdminRegistration() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -22,11 +23,7 @@ function AdminRegistration() {
     try {
       const imageData = preview ? preview.split(",")[1] : "";
 
-<<<<<<< HEAD
-      const response = await axios.post("https://travelling-backend.onrender.com/admin/register", {
-=======
 await axios.post(`${Api}/admin/register`, {
->>>>>>> d368039 (improvements)
         ...formData,
         image: imageData,
       });

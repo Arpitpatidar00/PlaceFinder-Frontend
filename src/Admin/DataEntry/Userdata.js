@@ -10,11 +10,7 @@ function UserPage() {
   useEffect(() => {
     async function fetchUsers() {
       try {
-<<<<<<< HEAD
-        const response = await axios.get("https://travelling-backend.onrender.com/api/v1/users");
-=======
         const response = await axios.get(`${Api}/api/v1/users`);
->>>>>>> d368039 (improvements)
         setUsers(response.data.data || []); // Ensure data is always an array
         console.log(response.data);
       } catch (error) {
@@ -27,11 +23,7 @@ function UserPage() {
 
   const handleDeleteUser = async (id) => {
     try {
-<<<<<<< HEAD
-      await axios.delete(`https://travelling-backend.onrender.com/api/v1/users/${id}`);
-=======
       await axios.delete(`${Api}/api/v1/users/${id}`);
->>>>>>> d368039 (improvements)
       const updatedUsers = users.filter((user) => user._id !== id);
       setUsers(updatedUsers);
     } catch (error) {

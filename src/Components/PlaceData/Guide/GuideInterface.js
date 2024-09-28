@@ -1,5 +1,4 @@
 
-<<<<<<< HEAD
 // import React, { useState } from "react";
 // import axios from "axios";
 // import "../Place.css"; // Ensure you have a CSS file for styles
@@ -91,8 +90,7 @@
 // };
 
 // export default GuideInterface;
-=======
->>>>>>> d368039 (improvements)
+
 import React, { useState } from "react";
 import axios from "axios";
 import "../Place.css"; // Ensure you have a CSS file for styles
@@ -106,16 +104,12 @@ const GuideInterface = ({ onDataSubmitted }) => {
   const [customPlace, setCustomPlace] = useState("");
 
   const {setPlaceId } = useAuth(); // Using the useAuth hook to get placeId
-  const userData = useSelector((state) => state.auth.userData);
-  const placeId = useSelector((state) => state.place.placeId);
+  const userDataString = localStorage.getItem("userData");
+  const userData = userDataString ? JSON.parse(userDataString) : null;  const placeId = useSelector((state) => state.place.placeId);
 
   const submitData = async () => {
     try {
-<<<<<<< HEAD
-      const response = await axios.post("https://travelling-backend.onrender.com/guide/guide", {
-=======
       const response = await axios.post(`${Api}/guide/guide`, {
->>>>>>> d368039 (improvements)
         placeId,
         time,
         price,

@@ -47,11 +47,7 @@ const Placedata = () => {
       };
   
       // Send the form data to the backend
-<<<<<<< HEAD
-      const response = await axios.post('https://travelling-backend.onrender.com/add/upload', dataToSend);
-=======
       const response = await axios.post(`{Api}/add/upload`, dataToSend);
->>>>>>> d368039 (improvements)
       console.log(response.data);
   
       // Reset form after submission

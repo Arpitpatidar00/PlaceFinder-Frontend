@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./Components/Views/Navbar";
@@ -10,12 +8,14 @@ import Profile from "./Components/Views/Profile.js";
 import ImageDetails from "./Components/PlaceData/ImageDetails.js";
 import StartPage from "./Components/Views/StartPage.js";
 import Signin from "./Components/Authentication/Signin.js";
-import Signup from "./Components/Authentication/Signup.js";
-import Adminlogin from "./Admin/AdminLoginPage.js";
+import AdminLogin from "./Admin/AdminLoginPage.js";
 import AdminPage from "./Admin/DataEntry/AdminPage.js";
+
 import AdminRegisteration from "./Admin/DataEntry/Adminregistration.js";
 import { AuthProvider } from "./Context/AuthContext.js";
 import PrivateRoute from "./Components/Authentication/Privateroutes.js"; // Import PrivateRoute
+import AdminMiddleware from "./Admin/AdminVerifecation.js";
+// import NotPrivateRoute from "./Components/Authentication/Privateroutes.js";
 
 function Start() {
   const location = useLocation();
@@ -26,7 +26,7 @@ function Start() {
     "/Feedback",
     "/Adminhome",
     "/admin",
-    "/profile"
+    "/profile",
   ];
   const shouldShowFooter = !hideFooterRoutes.includes(location.pathname);
 
@@ -36,17 +36,53 @@ function Start() {
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<StartPage />} />
-        <Route path="/Signup" element={<Signup />} />
-        <Route path="/login" element={<Signin />} />
-        <Route path="/Adminhome" element={<Adminlogin />} />
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path="/admin-registration" element={<AdminRegisteration />} />
 
-        {/* Private Routes */}
-        <Route path="/home" element={<PrivateRoute element={Home} />} />
-        <Route path="/Feedback" element={<PrivateRoute element={Feedback} />} />
-        <Route path="/profile" element={<PrivateRoute element={Profile} />} />
-        <Route path="/details/:id" element={<PrivateRoute element={ImageDetails} />} />
+        {/* <Route path="/login" element={< NotPrivateRoute element={Signin} />} /> */}
+        <Route path="/login" element={<Signin />} />
+
+        {/* Admin Routes - Protected */}
+        {/* <Route path="/admin-login" element={<AdminLogin />} /> */}
+        <Route
+          path="/admin-login"
+          element={
+            <AdminMiddleware>
+              <AdminLogin />
+            </AdminMiddleware>
+          }
+        />
+        <Route
+          path="/admin-registration"
+          element={
+            <PrivateRoute element={AdminRegisteration} requiredRole="admin" />
+          }
+        />
+        <Route
+          path="/adminhome"
+          element={
+            <PrivateRoute element={AdminPage} requiredRole="admin" />
+          }
+        />
+
+        {/* Private User Routes */}
+        <Route
+          path="/home"
+          element={<PrivateRoute element={Home} requiredRole="user" />}
+        />
+        <Route
+          path="/Feedback"
+          element={<PrivateRoute element={Feedback} requiredRole="user" />}
+        />
+        <Route
+          path="/profile"
+          element={<PrivateRoute element={Profile} requiredRole="user" />}
+        />
+        <Route
+          path="/details/:id"
+          element={<PrivateRoute element={ImageDetails} requiredRole="user" />}
+        />
+
+        {/* Admin Dashboard - Example Private Admin Route */}
+        {/* <Route path="/admin/dashboard" element={<PrivateRoute element={AdminDashboard} requiredRole="admin" />} /> */}
       </Routes>
       {shouldShowFooter && <Footer />}
     </AuthProvider>

@@ -19,11 +19,7 @@ const VideoUpload = () => {
     formData.append('description', description);
 
     try {
-<<<<<<< HEAD
-      const response = await axios.post('https://travelling-backend.onrender.com/video/upload', formData, {
-=======
       const response = await axios.post(`${Api}/video/upload`, formData, {
->>>>>>> d368039 (improvements)
         headers: {
           'Content-Type': 'multipart/form-data',
         },
