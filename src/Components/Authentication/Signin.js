@@ -118,8 +118,14 @@ function Login() {
       }
   
       // Call the signUp function
-      await signUp(userData);
-      
+      const response=await signUp(userData);
+      if (response.token && response.user) {
+        // Dispatch the login success action
+        dispatch(loginSuccess(response.user, response.token));
+
+        // Redirect to the home page or another dashboard
+        navigate('/home');
+      }
       alert('Signup successful!');
       navigate('/home');
     } catch (error) {

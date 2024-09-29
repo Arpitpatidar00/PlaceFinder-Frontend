@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/authActions";
 import "./Navbar.css";
 import { useAuth } from "../../Context/AuthContext";
+import { showAlert } from '../Loader/Alert.js';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -24,14 +25,17 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
-  const handleLogout = () => {
-    if (window.confirm("Are you sure you want to log out?")) {
-      dispatch(logout());
-      localStorage.removeItem("token");
-      localStorage.removeItem("userData");
-      navigate("/");
+  const handleLogout = async () => {
+    const confirmed = await showAlert("Are you sure you want to log out?");
+
+    if (confirmed) {
+        dispatch(logout());
+        localStorage.removeItem("token");
+        localStorage.removeItem("userData");
+        navigate("/");
     }
-  };
+};
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -132,7 +136,7 @@ const Navbar = () => {
               )}
             </li>
           )}
-          {!isAuthenticated && (
+          {!isAuthenticated && !isMobile && (
             <>
               <li>
                 <button
@@ -143,17 +147,6 @@ const Navbar = () => {
                   }}
                 >
                   Login
-                </button>
-              </li>
-              <li>
-                <button
-                  className="navbtn"
-                  onClick={() => {
-                    setIsLogin(true);
-                    navigateTo("/login");
-                  }}
-                >
-                  Signup
                 </button>
               </li>
             </>

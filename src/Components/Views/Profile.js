@@ -162,8 +162,7 @@ function Profile() {
             <div className="photos-section">
               <div className="photos-header mb-2">
                 <button
-                  className="show-all-link text-blue-500"
-                  onClick={handleShowAllImages}
+className="edit-profile-btn mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg"                  onClick={handleShowAllImages}
                 >
                   {showAllImages ? "Show less" : "Show all"}
                 </button>

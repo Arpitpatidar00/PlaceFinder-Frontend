@@ -11,7 +11,7 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  padding: 10px 20px;
+  padding: 5px 10px;
   font-family: Cursive;
 }
 
@@ -94,7 +94,6 @@
   transition-duration: 0.3s;
 }
 
-
 /* Navbar Links */
 .nav-links {
   list-style: none;
@@ -117,6 +116,31 @@
   color: #007bff;
 }
 
+/* Profile Menu Styles */
+.profile-menu {
+  position: relative; /* Needed for dropdown positioning */
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 60px; /* Adjust this value to align with your navbar */
+  right:0; /* Aligns the dropdown to the right of the profile image */
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Ensures dropdown appears above other content */
+  padding: 10px 10px; /* Vertical padding */
+}
+
+.profile-dropdown li {
+  padding: 8px 16px; /* Padding for each item */
+}
+
+.profile-dropdown li:hover {
+  background-color: #f0f0f0; /* Hover effect for dropdown items */
+}
+
 /* Mobile Menu Styles */
 @media (max-width: 768px) {
   .toggle {
@@ -127,7 +151,7 @@
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 60px;
+    top: 60px; /* Adjust according to navbar height */
     left: 0;
     right: 0;
     background-color: #fff;
