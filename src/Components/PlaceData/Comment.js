@@ -1,13 +1,9 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import UserDataDetails from '../Views/ProfileDetails';
 import './CommentSection.css';
 import Api from '../../Api';
-import { io } from "socket.io-client"; // Import Socket.IO client
-
-const socket = io(`${Api}`); // Update with your backend API URL
 
 const CommentSection = ({ placeName }) => {
   const userDataString = localStorage.getItem("userData");
@@ -57,20 +53,7 @@ const CommentSection = ({ placeName }) => {
     if (placeId) {
       fetchComments();
     }
-  
-    // Listen for new comments from the server
-    const handleNewComment = (comment) => {
-      setComments(prevComments => [...prevComments, comment]);
-    };
-  
-    socket.on('newComment', handleNewComment);
-  
-    // Cleanup on unmount
-    return () => {
-      socket.off('newComment', handleNewComment);
-    };
   }, [fetchComments, placeId]);
-  
 
   const handlePostComment = async () => {
     if (!newComment) return;
@@ -104,9 +87,8 @@ const CommentSection = ({ placeName }) => {
         setComments(prevComments => prevComments.map(comment => 
           comment._id === optimisticComment._id ? serverComment : comment
         ));
-        setTimeout(() => {
-          fetchComments();
-        }, 10);
+        // Refresh comments to ensure the latest data
+        fetchComments();
       } else {
         throw new Error('Failed to post comment');
       }
@@ -118,7 +100,6 @@ const CommentSection = ({ placeName }) => {
       setIsLoading(false);
     }
   };
-  
 
   if (!userData || !placeName || !placeId) {
     return <div>Loading...</div>;
@@ -136,30 +117,28 @@ const CommentSection = ({ placeName }) => {
 
   return (
     <div>
-    <div className="comment-section">
-      {isLoading && <div>Loading...</div>}
-      {error && <div className="error">Error: {error}</div>}
+      <div className="comment-section">
+        {isLoading && <div>Loading...</div>}
+        {error && <div className="error">Error: {error}</div>}
 
-      <div className="comment-input">
-        <img src={userData.profileImage} alt="User avatar" />
-        <textarea
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-          placeholder="Write a comment..."
-          aria-label="Comment input"
-        />
-        <button onClick={handlePostComment} disabled={isLoading}>
-          Post Comment
-        </button>
+        <div className="comment-input">
+          <img src={userData.profileImage} alt="User avatar" />
+          <textarea
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            placeholder="Write a comment..."
+            aria-label="Comment input"
+          />
+          <button onClick={handlePostComment} disabled={isLoading}>
+            Post Comment
+          </button>
+        </div>
+
+        {overlayVisible && (
+          <UserDataDetails user={selectedUser} onClose={handleClose} />
+        )}
       </div>
-
-     
-
-      {overlayVisible && (
-        <UserDataDetails user={selectedUser} onClose={handleClose} />
-      )}
-    </div>
-    <div className="comments-list">
+      <div className="comments-list">
         {comments.map((comment) => (
           <div
             key={comment._id}
@@ -177,7 +156,7 @@ const CommentSection = ({ placeName }) => {
           </div>
         ))}
       </div>
-      </div>
+    </div>
   );
 };
 
