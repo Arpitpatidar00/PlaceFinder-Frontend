@@ -354,11 +354,7 @@ function Login() {
               className={`step-container ${step === 4 ? "visible" : "hidden"}`}
             >
               <Components.Title>Upload Documents Image</Components.Title>
-              <Components.Input
-                type="file"
-                placeholder="Document Image"
-                onChange={(e) => setImage(e.target.files[0])}
-              />
+             
               {renderRoleInputs()}
               <Components.ToggleWrapper>
                 <Components.Button type="button" onClick={handlePrevious}>
