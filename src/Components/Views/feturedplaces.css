@@ -34,7 +34,7 @@
     background-size: cover; /* Fully cover the container */
     background-position: center;
     background-repeat: no-repeat;
-    -webkit-mask-image: url("/Users/arpitpatidar/Downloads/College-Project-main/client/public/pngwing.com (1).png");
+    -webkit-mask-image: url("/Users/arpitpatidar/Downloads/College-Project-main/client/public/pngwing.com (1).png"); /* Ensure the correct file name */
     -webkit-mask-repeat: no-repeat;
     mask-image: url("/Users/arpitpatidar/Downloads/College-Project-main/client/public/pngwing.com (1).png");
     mask-repeat: no-repeat;

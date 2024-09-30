@@ -247,8 +247,7 @@ function Login() {
       {islogin && (
         <Components.SignUpContainer signinIn={signIn}>
           <Components.Form onSubmit={handleSignUp}>
-            <Components.SliderContainer>
-              {/* Step Indicators */}
+            {/* <Components.SliderContainer>
               <div className="step-indicators">
                 {[1, 2, 3, 4, 5].map((s) => (
                   <div
@@ -267,7 +266,33 @@ function Login() {
                 value={step}
                 readOnly
               />
-            </Components.SliderContainer>
+            </Components.SliderContainer> */}
+<Components.SliderContainer>
+  {/* Step Indicators */}
+  <div className="step-indicators">
+    {[1, 2, 3, 4, 5].map((s) => {
+      if (s === 4 && !(role === 'driver' || role === 'guide')) {
+        return null; // Do not render step 4 for non-driver/guide users
+      }
+      return (
+        <div
+          key={s}
+          className={`step-indicator ${step >= s ? "active" : ""}`}
+        >
+          <FaCheckCircle />
+          <span>{s}</span>
+        </div>
+      );
+    })}
+  </div>
+  <Components.CheckpointSlider
+    type="range"
+    min="1"
+    max={role === 'driver' || role === 'guide' ? "5" : "4"}
+    value={step}
+    readOnly
+  />
+</Components.SliderContainer>
 
             {/* Step 1 */}
             <div
@@ -338,7 +363,6 @@ function Login() {
                 placeholder="Profile Image"
                 onChange={handleImageChange} // Use the updated function
               />
-              {renderRoleInputs()}
               <Components.ToggleWrapper>
                 <Components.Button type="button" onClick={handlePrevious}>
                   Previous
