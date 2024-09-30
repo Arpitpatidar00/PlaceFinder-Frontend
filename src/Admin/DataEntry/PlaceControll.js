@@ -12,7 +12,7 @@ import Api from '../../Api.js';
 
 const CardData = () => {
 
-  const { items, setItems } = useAdmin();
+  const { items, setItems } = useAdmin(false);
   const [selectedId, setSelectedId] = useState(null);
   const [ref, inView] = useInView();
   const dispatch = useDispatch();
