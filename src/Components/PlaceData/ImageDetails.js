@@ -220,8 +220,8 @@ const ImageDetails = () => {
                     className="bd-placeholder-img img-thumbnail"
                     style={{ maxWidth: 200, maxHeight: 150 }}
                     onMouseOver={(e) => {
-                      e.target.style.maxWidth = "400px";
-                      e.target.style.maxHeight = "300px";
+                      e.target.style.maxWidth = "200";
+                      e.target.style.maxHeight = "150";
                     }}
                     onMouseOut={(e) => {
                       e.target.style.maxWidth = "200px";

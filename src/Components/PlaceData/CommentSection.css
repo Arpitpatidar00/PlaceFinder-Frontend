@@ -3,42 +3,50 @@
 .comment-section {
   max-width: 600px; /* Set a maximum width for the comment section */
   margin: 0 auto; /* Center the comment section */
-  padding: 20px; /* Add padding inside the comment section */
-  background-color: #f9f9f9; /* Light background color */
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 25px; /* Add padding inside the comment section */
+  background-color: #ffffff; /* White background for a clean look */
+  border-radius: 10px; /* Slightly larger rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
 }
 
 .comment-input {
   display: flex;
   align-items: center;
-  margin-bottom: 20px; /* Space between input and comments */
+  margin-bottom: 25px; /* Space between input and comments */
 }
 
 .comment-input img {
-  width: 40px; /* Avatar width */
-  height: 40px; /* Avatar height */
+  width: 45px; /* Avatar width */
+  height: 45px; /* Avatar height */
   border-radius: 50%; /* Round avatar */
-  margin-right: 10px; /* Space between avatar and textarea */
+  margin-right: 15px; /* Space between avatar and textarea */
 }
 
 .comment-input textarea {
   flex-grow: 1; /* Take available space */
-  padding: 10px; /* Inner padding */
-  border: 1px solid #ddd; /* Border for textarea */
-  border-radius: 4px; /* Rounded corners */
+  padding: 12px; /* Inner padding */
+  border: 1px solid #ccc; /* Border for textarea */
+  border-radius: 5px; /* Rounded corners */
   resize: none; /* Disable resizing */
+  font-size: 16px; /* Slightly larger font size */
+  transition: border-color 0.2s; /* Smooth transition for border */
+}
+
+.comment-input textarea:focus {
+  border-color: #007bff; /* Highlight border on focus */
+  outline: none; /* Remove outline */
 }
 
 .comment-input button {
-  padding: 10px 15px; /* Button padding */
+  padding: 12px 20px; /* Button padding */
   margin-left: 10px; /* Space between button and textarea */
   border: none; /* Remove default border */
-  border-radius: 4px; /* Rounded corners */
+  border-radius: 5px; /* Rounded corners */
   background-color: #007bff; /* Button color */
   color: #fff; /* Text color */
   cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s; /* Smooth transition */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+  font-weight: bold; /* Bold text */
 }
 
 .comment-input button:disabled {
@@ -48,6 +56,7 @@
 
 .comment-input button:hover:not(:disabled) {
   background-color: #0056b3; /* Darken button on hover */
+  transform: translateY(-1px); /* Slight lift effect */
 }
 
 .comments-list {
@@ -57,8 +66,8 @@
 .comment {
   display: flex; /* Use flexbox for alignment */
   align-items: flex-start; /* Align items at the start */
-  background-color: #fff; /* White background for comment card */
-  border: 1px solid #ddd; /* Border for comment card */
+  background-color: #f7f7f7; /* Light gray background for comment card */
+  border: 1px solid #e1e1e1; /* Border for comment card */
   border-radius: 8px; /* Rounded corners */
   padding: 15px; /* Inner padding */
   margin-bottom: 15px; /* Space between comments */
@@ -67,14 +76,14 @@
 }
 
 .comment:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Shadow on hover */
 }
 
 .comment img {
-  width: 40px; /* Avatar width */
-  height: 40px; /* Avatar height */
+  width: 45px; /* Avatar width */
+  height: 45px; /* Avatar height */
   border-radius: 50%; /* Round avatar */
-  margin-right: 10px; /* Space between avatar and comment text */
+  margin-right: 15px; /* Space between avatar and comment text */
 }
 
 .comment-content {
@@ -83,17 +92,20 @@
 
 .comment-author {
   font-weight: bold; /* Bold for author name */
+  font-size: 16px; /* Slightly larger font size */
+  color: #333; /* Darker color for the author */
   margin-bottom: 5px; /* Space below author name */
 }
 
 .comment-text {
+  font-size: 14px; /* Font size for comment text */
   color: #555; /* Gray color for comment text */
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
   .comment-section {
-    padding: 15px; /* Reduce padding for smaller screens */
+    padding: 20px; /* Reduce padding for smaller screens */
   }
 
   .comment-input {
@@ -125,20 +137,20 @@
 
 @media (max-width: 480px) {
   .comment-input img {
-    width: 30px; /* Smaller avatar for extra small screens */
-    height: 30px; /* Smaller avatar height */
+    width: 35px; /* Smaller avatar for extra small screens */
+    height: 35px; /* Smaller avatar height */
   }
 
   .comment-input textarea {
-    padding: 8px; /* Reduce padding for textarea */
+    padding: 10px; /* Reduce padding for textarea */
   }
 
   .comment-input button {
-    padding: 8px; /* Reduce padding for button */
+    padding: 10px; /* Reduce padding for button */
   }
 
   .comment img {
-    width: 30px; /* Smaller avatar for comments */
-    height: 30px; /* Smaller avatar height */
+    width: 35px; /* Smaller avatar for comments */
+    height: 35px; /* Smaller avatar height */
   }
 }
