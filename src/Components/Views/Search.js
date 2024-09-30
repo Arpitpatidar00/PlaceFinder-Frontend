@@ -41,18 +41,25 @@ const Search = () => {
     try {
       if (query.trim() !== "") {
         setLoading(true); // Set loading to true before API call
-        const response = await axios.get(
-          `${Api}/add/search?query=${query.trim()}`
-        );
+  
+        // Make the API call to search for images
+        const response = await axios.get(`${Api}/add/search?query=${query.trim()}`);
+  
+        // Update state with the received images
         setImages(response.data);
+  
+        // Log the retrieved images (for debugging purposes)
+        console.log("Images retrieved:", response.data);
       }
     } catch (error) {
+      // Handle any errors that occur during the API call
       console.error("Error searching:", error);
     } finally {
-      setLoading(false); // Set loading to false after API call is complete
+      // Set loading to false after the API call is complete, regardless of success or failure
+      setLoading(false);
     }
   };
-
+  
   const handleCardClick = (placeId) => {
     dispatch(setPlaceId(placeId));
   };
