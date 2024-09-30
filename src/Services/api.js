@@ -5,6 +5,7 @@ import Api from '../Api';
 
 
 export const signUp = async (userData) => {
+  console.log(userData)
   try {
     const response = await axios.post(`${Api}/auth/signup`, userData);
     return response.data;  // Return the server response

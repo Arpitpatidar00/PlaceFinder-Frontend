@@ -1,239 +1,104 @@
 /* Main featured container */
 .featured {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top:60px;
-    flex-wrap: wrap; /* Allows wrapping on smaller screens */
-    
-  }
-  
-  /* Shared styles for both featured places */
-  .featured-places1{
-      width: 800px;
-      height: 800px;
-      background-image: url("https://vl-prod-static.b-cdn.net/system/images/000/695/823/912291ec3c8e103355422c30aa0579fa/original/pachmahri_adventure_geek.jpg?1691554980");
-      background-size: cover; /* Fully cover the container */
-      background-position: center;
-      background-repeat: no-repeat;
-      -webkit-mask-image: url("/Users/arpitpatidar/Downloads/College-Project-main/client/public/pngwing.com (1).png");
-      -webkit-mask-repeat: no-repeat;
-      mask-image: url("/Users/arpitpatidar/Downloads/College-Project-main/client/public/pngwing.com (1).png");
-      mask-repeat: no-repeat;
-      mask-size: contain;
-      mask-position: center;
-      box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    
-    }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 60px;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+}
 
+/* Shared styles for both featured places */
+.featured-places1,
+.featured-places2 {
+  width: 100%; /* Use full width on small screens */
+  max-width: 800px; /* Max width for larger screens */
+  min-height: 400px; /* Ensure minimum height for better layout */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* mask-image: url("https://e7.pngegg.com/pngimages/485/443/png-clipart-black-painting-illustration-brush-ink-brush-pen-and-ink-ink-text.png"); */
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: center;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 4px, rgba(0, 0, 0, 0.2) 0px 7px 13px -3px;
+  transition: transform 0.3s ease; /* Add a hover effect */
+}
+
+.featured-places1:hover,
+.featured-places2:hover {
+  transform: scale(1.05); /* Scale effect on hover */
+}
+
+/* Specific backgrounds for each place */
+.featured-places1 {
+  background-image: url("https://vl-prod-static.b-cdn.net/system/images/000/695/823/912291ec3c8e103355422c30aa0579fa/original/pachmahri_adventure_geek.jpg?1691554980");
+}
+
+.featured-places2 {
+  background-image: url("https://media1.thrillophilia.com/filestore/lfzzd0l9a8ugbkkkcnra44qaxpfz_1604757284_shutterstock_1227338428.jpg?w=400&dpr=2");
+}
+
+/* Content container styling */
+.place-content {
+  width: 90%; /* Responsive width */
+  max-width: 500px; /* Max width */
+  padding: 15px;
+  margin: 10px auto; /* Center align */
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly more opaque */
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 4px, rgba(0, 0, 0, 0.2) 0px 7px 13px -3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-family: "Lucida Handwriting", Cursive;
+}
+
+/* H1 style inside content */
+.place-content h1 {
+  font-size: 3rem; /* Adjusted for better scaling */
+  margin-bottom: 10px;
+}
+
+/* Paragraph styling */
+.place-content p {
+  font-size: 1.1rem; /* Adjust for better readability */
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .featured-places1,
   .featured-places2 {
-    width: 800px;
-    height: 800px;
-    background-image: url("https://media1.thrillophilia.com/filestore/lfzzd0l9a8ugbkkkcnra44qaxpfz_1604757284_shutterstock_1227338428.jpg?w=400&dpr=2");
-    background-size: cover; /* Fully cover the container */
-    background-position: center;
-    background-repeat: no-repeat;
-    -webkit-mask-image: url("/Users/arpitpatidar/Downloads/College-Project-main/client/public/pngwing.com (1).png"); /* Ensure the correct file name */
-    -webkit-mask-repeat: no-repeat;
-    mask-image: url("/Users/arpitpatidar/Downloads/College-Project-main/client/public/pngwing.com (1).png");
-    mask-repeat: no-repeat;
-    mask-size: contain;
-    mask-position: center;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-  
+      height: 300px; /* Adjust height for smaller screens */
   }
-  
-  /* Content container styling */
-  .place-content {
-    width: 500px;
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-      rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    font-family: "Lucida Handwriting", Cursive;
 
+  .place-content {
+      width: 95%; /* Full width on small screens */
   }
-  
-  /* H1 style inside content */
+
   .place-content h1 {
-    font-size: 5rem; /* Use relative units for better scaling */
-    margin-bottom: 10px;
-  }
-  
-  /* Paragraph styling */
-  .place-content p {
-    font-size: 1.2rem;
-  }
-  
-  /* Animation for fade-in and slide-up */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(50px); /* Start lower */
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0); /* Move to original position */
-    }
-  }
-  
-  /* Initially hidden state */
-  .hidden {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 0.5s ease;
-  }
-  
-  /* Visible state for animation */
-  .visible {
-    opacity: 1;
-    transform: translateY(0);
-    animation: fadeInUp 1s ease-in-out;
-  }
-  
-  /* Responsive adjustments */
-  
-  /* Large desktop screens (over 1400px) */
-  @media (max-width: 1400px) {
-    .featured-places1,
-    .featured-places2 {
-      width: 600px;
-      height: 600px;
-    }
-  
-    .place-content {
-      width: 500px;
-    }
-  
-    .place-content h1 {
-      font-size: 1.8rem;
-    }
-  }
-  
-  /* Medium desktops (1200px to 1400px) */
-  @media (max-width: 1200px) {
-    .featured-places1,
-    .featured-places2 {
-      width: 500px;
-      height: 500px;
-    }
-  
-    .place-content {
-      width: 450px;
-    }
-  
-    .place-content h1 {
-      font-size: 1.6rem;
-    }
-  
-    .place-content p {
-      font-size: 1.1rem;
-    }
-  }
-  
-  /* Small desktops and large tablets (992px to 1200px) */
-  @media (max-width: 992px) {
-    .featured {
-      flex-direction: column; /* Stack the content vertically */
-      align-items: center;
-    }
-  
-    .featured-places1,
-    .featured-places2 {
-      width: 90%; /* Use relative width */
-      height: 400px;
-    }
-  
-    .place-content {
-      width: 85%;
-    }
-  
-    .place-content h1 {
       font-size: 1.5rem;
-    }
-  
-    .place-content p {
+  }
+
+  .place-content p {
       font-size: 1rem;
-    }
   }
-  
-  /* Tablets (768px to 992px) */
-  @media (max-width: 768px) {
-    .featured-places1,
-    .featured-places2 {
-      width: 100%; /* Full width */
-      height: 350px;
-    }
-  
-    .place-content {
-      width: 90%;
-    }
-  
-    .place-content h1 {
-      font-size: 1.3rem;
-    }
-  
-    .place-content p {
-      font-size: 0.95rem;
-    }
-  }
-  
-  /* Small tablets and large smartphones (576px to 768px) */
-  @media (max-width: 576px) {
-    .featured-places1,
-    .featured-places2 {
-      height: 300px;
-    }
-  
-    .place-content {
-      width: 100%;
-      padding: 15px;
-    }
-  
-    .place-content h1 {
-      font-size: 1.2rem;
-    }
-  
-    .place-content p {
-      font-size: 0.9rem;
-    }
-  }
-  
-  /* Mobile phones (under 576px) */
-  @media (max-width: 576px) {
-    .featured-places1,
-    .featured-places2 {
+}
+
+@media (max-width: 576px) {
+  .featured-places1,
+  .featured-places2 {
       height: 250px;
-    }
-  
-    .place-content {
+  }
+
+  .place-content {
       padding: 10px;
-      margin-right: 20px;
-    }
-  
-    .place-content h1 {
-      font-size: 2.0rem;
-    }
-  
-    .place-content p {
-      font-size: 0.8rem;
-    }
   }
-  
-  /* Very small phones (below 400px) */
-  @media (max-width: 400px) {
-    .place-content h1 {
-      font-size: 1.9rem;
-    }
-  
-    .place-content p {
-      font-size: 0.75rem;
-    }
+
+  .place-content h1 {
+      font-size: 1.3rem;
   }
+
+  .place-content p {
+      font-size: 0.9rem;
+  }
+}
