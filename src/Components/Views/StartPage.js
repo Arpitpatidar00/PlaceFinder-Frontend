@@ -31,6 +31,7 @@ const StartPage = () => {
                   </span>
                 </h2>
                 <button
+                className="start-page-btn"
                   onClick={handleStartClick}
                   data-te-ripple-init
                   data-te-ripple-color="light"
@@ -42,7 +43,6 @@ const StartPage = () => {
                   data-te-ripple-init
                   data-te-ripple-color="light"
                 >
-                  Learn more
                 </a>
               </div>
 

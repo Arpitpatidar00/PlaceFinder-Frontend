@@ -119,19 +119,19 @@ const Navbar = () => {
               />
               {isProfileMenuOpen && (
                 <ul className="profile-dropdown">
-                  <li>
+                 
                     <button
                       className="navbtn"
                       onClick={() => navigateTo("/profile")}
                     >
                       View Profile
                     </button>
-                  </li>
-                  <li>
+                 
+                 
                     <button className="navbtn" onClick={handleLogout}>
                       Logout <LogoutIcon />
                     </button>
-                  </li>
+                  
                 </ul>
               )}
             </li>

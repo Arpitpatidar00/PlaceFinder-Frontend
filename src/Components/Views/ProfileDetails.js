@@ -1,18 +1,19 @@
-
 import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import "./FeedbackDetails.css";
 import Api from '../../Api.js';
-
+import Loader from "../Loader/Loader.js"; // Assuming you have a Loader component
 
 export default function UserDataDetails({ user, onClose }) {
   const [userData, setUserData] = useState(null);
   const [userImages, setUserImages] = useState([]);
   const [showAllImages, setShowAllImages] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [loading, setLoading] = useState(false); // Loading state
 
   useEffect(() => {
     const fetchUserData = async () => {
+      setLoading(true); // Set loading to true before fetching data
       try {
         const response = await fetch(`${Api}/Feedback/onlyone${user}`);
 
@@ -29,6 +30,8 @@ export default function UserDataDetails({ user, onClose }) {
         }
       } catch (error) {
         console.error("Error fetching feedback details:", error);
+      } finally {
+        setLoading(false); // Set loading to false after data is fetched
       }
     };
 
@@ -54,6 +57,12 @@ export default function UserDataDetails({ user, onClose }) {
     [showAllImages, userImages]
   );
 
+  // If loading, show the Loader component
+  if (loading) {
+    return <Loader />; // Display Loader component while fetching data
+  }
+
+  // Return null if no user data exists after loading is complete
   if (!userData) {
     return null;
   }
@@ -89,20 +98,19 @@ export default function UserDataDetails({ user, onClose }) {
             </button>
           </div>
           <div className="photos-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {displayedImages.map((userImages) => (
-              <div key={userImages.id} className="photo-item">
+            {displayedImages.map((image) => (
+              <div key={image.id} className="photo-item">
                 <img
-                  src={userImages.imageString}
+                  src={image.imageString}
                   alt="User Upload"
                   className="w-full h-auto object-cover cursor-pointer"
-                  onClick={() => handleImageClick(userImages)}
+                  onClick={() => handleImageClick(image)}
                 />
               </div>
             ))}
           </div>
         </div>
       </div>
-
 
       {selectedImage && (
         <div className="modal" onClick={toggleModal}>

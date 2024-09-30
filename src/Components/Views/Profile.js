@@ -80,46 +80,104 @@ function Profile() {
     setEditOption(e.target.value);
   };
 
-  const handleSaveChanges = async () => {
+const handleSaveChanges = async () => {
     const formData = new FormData();
 
-    if (editOption === "photo" && newImage) {
-      try {
-        const base64Image = await fileToBase64(newImage);
-        formData.append("image", base64Image); // Append base64 string
-      } catch (error) {
-        console.error("Error converting image to base64:", error);
-        return;
-      }
-    } else if (editOption === "password") {
-      if (newPassword !== confirmPassword) {
-        alert("New password and confirm password do not match.");
-        return;
-      }
-      formData.append("oldPassword", oldPassword);
-      formData.append("newPassword", newPassword);
-    } else if (editOption === "name") {
-      formData.append("name", newName);
-    } else if (editOption === "number") {
-      formData.append("mobileNumber", newNumber);
-    } else if (editOption === "bio") {
-      formData.append("bio", newBio);
+    // Check if editOption is set correctly
+    console.log("Selected Edit Option:", editOption);
+
+    // Function to append form data based on the edit option
+    const appendFormData = () => {
+        switch (editOption) {
+            case "photo":
+                if (!newImage) {
+                    alert("Please select an image.");
+                    return false;
+                }
+                return fileToBase64(newImage)
+                    .then(base64Image => {
+                        formData.append("image", base64Image);
+                    })
+                    .catch(error => {
+                        console.error("Error converting image to base64:", error);
+                        alert("Error converting image. Please try again.");
+                        return false;
+                    });
+            case "password":
+                if (newPassword !== confirmPassword) {
+                    alert("New password and confirm password do not match.");
+                    return false;
+                }
+                formData.append("oldPassword", oldPassword);
+                formData.append("newPassword", newPassword);
+                break;
+            case "name":
+                if (!newName) {
+                    alert("Please enter a name.");
+                    return false;
+                }
+                formData.append("name", newName);
+                break;
+            case "number":
+                if (!newNumber) {
+                    alert("Please enter a mobile number.");
+                    return false;
+                }
+                formData.append("mobileNumber", newNumber);
+                break;
+            case "bio":
+                if (!newBio) {
+                    alert("Please enter a bio.");
+                    return false;
+                }
+                formData.append("bio", newBio);
+                break;
+            default:
+                alert("Please select a valid edit option.");
+                return false;
+        }
+        return true;
+    };
+
+    const isValid = await appendFormData();
+    if (!isValid) return; // Exit if form data is invalid
+
+    // Log formData to see what is appended
+    for (let [key, value] of formData.entries()) {
+        console.log(key, value);
     }
 
     try {
-      await axios.put(`${Api}/auth/profileupdate/${userData._id}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      alert("Profile updated successfully!");
+        await axios.put(`${Api}/auth/profileupdate/${userData._id}`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+        alert("Profile updated successfully!");
+
+        // Reset form fields based on editOption
+        resetFormFields();
+        
     } catch (error) {
-      console.error("Error updating profile:", error);
+        console.error("Error updating profile:", error);
+        alert("Failed to update profile. Please try again.");
     } finally {
-      setEditMode(false);
-      setEditOption("");
+        setEditMode(false);
+        setEditOption("");
     }
-  };
+};
+
+// Function to reset form fields after successful update
+const resetFormFields = () => {
+    setNewImage(null);
+    setOldPassword('');
+    setNewPassword('');
+    setConfirmPassword('');
+    setNewName('');
+    setNewNumber('');
+    setNewBio('');
+};
+
   return (
     <>
       <div>
@@ -162,7 +220,8 @@ function Profile() {
             <div className="photos-section">
               <div className="photos-header mb-2">
                 <button
-className="edit-profile-btn mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg"                  onClick={handleShowAllImages}
+                  className="show-all text-blue-500"
+                  onClick={handleShowAllImages}
                 >
                   {showAllImages ? "Show less" : "Show all"}
                 </button>

@@ -36,6 +36,26 @@ img {
   max-width: 100%; /* Responsive image */
   border-radius: 12px; /* Rounded corners */
 }
+.start-page-btn {
+  background-color: #81d75d; /* Green background */
+  border: none; /* Remove border */
+  color: rgb(0, 0, 0); /* White text */
+  padding: 15px 32px; /* Padding around text */
+  text-align: center; /* Center text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block; /* Keep inline-block to size properly */
+  font-size: 16px; /* Set font size */
+  margin: 4px 12px; /* Small margin around */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+  border-radius: 8px; /* Rounded corners */
+  transition: background-color 0.3s ease; /* Smooth transition for background-color */
+}
+
+.start-page-btn:hover {
+  background-color: #bae0bce6; /* Darker green on hover */
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
