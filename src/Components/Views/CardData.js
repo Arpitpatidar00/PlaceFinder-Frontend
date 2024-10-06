@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { setPlaceId } from "../../actions/placeActions.js";
 import "../Card.css";
 import { useAuth } from "../../Context/AuthContext.js";
-import Api from '../../Api.js';
+import Api from "../../Api.js";
 import Loader from "../Loader/Loader.js";
 
 const CardData = () => {
@@ -21,9 +19,9 @@ const CardData = () => {
   const navigate = useNavigate();
 
   // Fetch data on component mount
-  useEffect(() => { 
+  useEffect(() => {
     const fetchData = async () => {
-      setLoading(true); 
+      setLoading(true);
 
       try {
         const response = await fetch(`${Api}/add/`); // Remove pagination
@@ -49,7 +47,10 @@ const CardData = () => {
     navigate(`/details/${_id}`);
   };
 
-  const selectedItem = useMemo(() => items.find(item => item._id === selectedId), [items, selectedId]);
+  const selectedItem = useMemo(
+    () => items.find((item) => item._id === selectedId),
+    [items, selectedId]
+  );
 
   return (
     <>
@@ -58,7 +59,11 @@ const CardData = () => {
       ) : (
         <div ref={ref} className={`card-container ${inView ? "visible" : ""}`}>
           {items.map((item) => (
-            <div key={item._id} className="card-link" onClick={() => handleCardClick(item._id)}>
+            <div
+              key={item._id}
+              className="card-link"
+              onClick={() => handleCardClick(item._id)}
+            >
               <div className="flip-card">
                 <div className="flip-card-inner">
                   <div className="flip-card-front">
@@ -69,14 +74,22 @@ const CardData = () => {
                       exit={{ opacity: 0, y: -50 }}
                       className="max-w-sm rounded overflow-hidden shadow-lg relative card"
                     >
-                      <img className="w-full img" src={item.image} alt={item.placeName} />
+                      <img
+                        className="w-full img"
+                        src={item.image}
+                        alt={item.placeName}
+                      />
                       <div className="container-card">
-                        <motion.h5 className="font-bold text-xl mb-2 placename">{item.placeName}</motion.h5>
+                        <motion.h5 className="font-bold text-xl mb-2 placename">
+                          {item.placeName}
+                        </motion.h5>
                       </div>
                     </motion.div>
                   </div>
                   <div className="flip-card-back">
-                    <p className="card-title">{item.placeName}, {item.cityName}</p>
+                    <p className="card-title">
+                      {item.placeName}, {item.cityName}
+                    </p>
                     <p>{item.description}</p>
                   </div>
                 </div>
@@ -101,10 +114,18 @@ const CardData = () => {
                   exit={{ opacity: 0, y: -50 }}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <img className="w-full img" src={selectedItem.image} alt={selectedItem.placeName} />
+                  <img
+                    className="w-full img"
+                    src={selectedItem.image}
+                    alt={selectedItem.placeName}
+                  />
                   <div className="px-6 py-4">
-                    <motion.h5 className="font-bold text-xl mb-2">{selectedItem.placeName}</motion.h5>
-                    <motion.p className="text-gray-700 text-base">{selectedItem.description}</motion.p>
+                    <motion.h5 className="font-bold text-xl mb-2">
+                      {selectedItem.placeName}
+                    </motion.h5>
+                    <motion.p className="text-gray-700 text-base">
+                      {selectedItem.description}
+                    </motion.p>
                   </div>
                   <div className="px-6 pt-4 pb-2">
                     <motion.button
@@ -120,7 +141,6 @@ const CardData = () => {
           </AnimatePresence>
         </div>
       )}
-     
     </>
   );
 };

@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { MDBCard, MDBCardBody, MDBCol, MDBContainer, MDBIcon, MDBRow, MDBTypography } from "mdb-react-ui-kit";
+import {
+  MDBCard,
+  MDBCardBody,
+  MDBCol,
+  MDBContainer,
+  MDBIcon,
+  MDBRow,
+  MDBTypography,
+} from "mdb-react-ui-kit";
 import UserDataDetails from "../Views/ProfileDetails.js"; // Ensure the path is correct
 import "./Feedback.css";
 import Api from "../../Api.js";
@@ -12,7 +20,7 @@ export default function Feedbackshow() {
   const [selectedFeedbackId, setSelectedFeedbackId] = useState(null);
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [loading, setLoading] = useState(false); // Loading state
-const {feedback}=useAuth();
+  const { feedback } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,7 +48,7 @@ const {feedback}=useAuth();
           );
         } else {
           console.error("Failed to fetch feedback data");
-          
+
           // Optional: Set an error state here to inform users
         }
       } catch (error) {
@@ -52,10 +60,9 @@ const {feedback}=useAuth();
         // If setFeedback is meant to handle a different state, clarify its purpose
       }
     };
-  
+
     fetchFeedbackData();
   }, [feedback]); // Only re-fetch if 'feedback' changes
-  
 
   const getTimeAgo = (timestamp) => {
     const now = new Date();
@@ -95,7 +102,9 @@ const {feedback}=useAuth();
 
   return (
     <>
-      {loading ? <Loader /> : (
+      {loading ? (
+        <Loader />
+      ) : (
         <div id="Feedback">
           <section className={`feedback-section ${isVisible ? "visible" : ""}`}>
             <MDBContainer className="py-2">
@@ -155,7 +164,10 @@ const {feedback}=useAuth();
           {overlayVisible && (
             <div className="overlay">
               <div className="overlay-content">
-                <UserDataDetails user={selectedFeedbackId} onClose={handleClose} />
+                <UserDataDetails
+                  user={selectedFeedbackId}
+                  onClose={handleClose}
+                />
               </div>
             </div>
           )}

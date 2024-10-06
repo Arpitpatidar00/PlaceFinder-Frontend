@@ -17,7 +17,6 @@ function UserPage() {
         const response = await axios.get(`${Api}/auth/users`, {
           params: { page, limit: 5 }  // Fetch 10 users per request
         });
-        console.log(response)
         setUsers((prevUsers) => [...prevUsers, ...response.data.data || []]);
         setLoading(false);
       } catch (error) {

@@ -49,7 +49,6 @@ const Search = () => {
         setImages(response.data);
   
         // Log the retrieved images (for debugging purposes)
-        console.log("Images retrieved:", response.data);
       }
     } catch (error) {
       // Handle any errors that occur during the API call

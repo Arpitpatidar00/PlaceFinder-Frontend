@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/authActions";
 import "./Navbar.css";
 import { useAuth } from "../../Context/AuthContext";
-import { showAlert } from '../Loader/Alert.js';
+import { showAlert } from "../Loader/Alert.js";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -29,13 +29,12 @@ const Navbar = () => {
     const confirmed = await showAlert("Are you sure you want to log out?");
 
     if (confirmed) {
-        dispatch(logout());
-        localStorage.removeItem("token");
-        localStorage.removeItem("userData");
-        navigate("/");
+      dispatch(logout());
+      localStorage.removeItem("token");
+      localStorage.removeItem("userData");
+      navigate("/");
     }
-};
-
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -102,7 +101,10 @@ const Navbar = () => {
           )}
           {isAdmin && (
             <li>
-              <button className="navbtn" onClick={() => navigateTo("/admin")}>
+              <button
+                className="navbtn"
+                onClick={() => navigateTo("/Adminhome")}
+              >
                 Admin
               </button>
             </li>
@@ -119,19 +121,16 @@ const Navbar = () => {
               />
               {isProfileMenuOpen && (
                 <ul className="profile-dropdown">
-                 
-                    <button
-                      className="navbtn"
-                      onClick={() => navigateTo("/profile")}
-                    >
-                      View Profile
-                    </button>
-                 
-                 
-                    <button className="navbtn" onClick={handleLogout}>
-                      Logout <LogoutIcon />
-                    </button>
-                  
+                  <button
+                    className="navbtn"
+                    onClick={() => navigateTo("/profile")}
+                  >
+                    View Profile
+                  </button>
+
+                  <button className="navbtn" onClick={handleLogout}>
+                    Logout <LogoutIcon />
+                  </button>
                 </ul>
               )}
             </li>
