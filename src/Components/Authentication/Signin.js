@@ -39,7 +39,7 @@ function Login() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768 && window.innerWidth > 360);
+      setIsMobile(window.innerWidth < 768 && window.innerWidth > 320);
     };
 
     handleResize(); // Check the size on initial load
