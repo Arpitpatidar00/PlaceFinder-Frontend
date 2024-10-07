@@ -154,7 +154,7 @@ export const Title = styled.h1`
   font-weight: bold;
   margin: 0 0 20px;
   font-size: 28px;
-  color: #333;
+  color: #ff4b2b;
 
   // Medium screens
   @media (max-width: 768px) {
