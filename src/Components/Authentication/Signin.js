@@ -21,7 +21,7 @@ function Login() {
   const navigate = useNavigate();
 
   const [signIn, toggle] = React.useState(true);
-  const [step, setStep] = React.useState(1);
+  const [step, setStep] = React.useState(0);
   const [role, setRole] = React.useState("");
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
